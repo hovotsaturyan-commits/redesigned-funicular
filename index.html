@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b12">
+<title>REALITY — Discover More</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090b12;color:#f5f6fb;font:16px -apple-system,BlinkMacSystemFont,sans-serif}
+header{padding:24px 18px 16px;border-bottom:1px solid #242735;position:sticky;top:0;background:#090b12}
+.logo{font-size:28px;font-weight:900;letter-spacing:5px}
+.sub{color:#a4a8bb;font-size:13px;margin-top:5px}
+main{max-width:650px;margin:auto;padding:18px}
+h2{font-size:23px;margin:12px 0}
+p{line-height:1.55;color:#c4c8d8}
+.card{background:#131622;border:1px solid #292d40;border-radius:20px;padding:19px;margin:15px 0}
+.tag{font-size:12px;color:#a9a1ff;text-transform:uppercase;letter-spacing:1.5px}
+button{background:#8b7cff;color:#090b12;border:0;border-radius:12px;padding:12px 15px;font-weight:750;font-size:14px;cursor:pointer}
+button.secondary{background:#25293a;color:#fff}
+button:active{opacity:.7}
+nav{display:flex;gap:8px;overflow:auto;padding:14px 0}
+nav button{white-space:nowrap}
+.big{font-size:45px;margin:12px 0}
+input{width:100%;padding:14px;background:#090b12;color:white;border:1px solid #41465d;border-radius:12px;font-size:16px;margin:8px 0}
+footer{text-align:center;color:#777d92;padding:30px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">REALITY</div>
+  <div class="sub">DISCOVER MORE THAN YOU KNOW</div>
+</header>
+<main>
+  <section class="card">
+    <div class="tag">ТВОЙ МИР. КАЖДЫЙ ДЕНЬ.</div>
+    <h2>Мир больше, чем кажется.</h2>
+    <p>Узнавай удивительные факты, открывай новые идеи и задавай вопросы, на которые давно хотел получить ответ.</p>
+    <button onclick="document.getElementById('discover').scrollIntoView({behavior:'smooth'})">Начать открывать →</button>
+  </section>
+  <nav>
+    <button onclick="show('all')">Для тебя</button>
+    <button class="secondary" onclick="show('science')">Наука</button>
+    <button class="secondary" onclick="show('mind')">Психология</button>
+    <button class="secondary" onclick="show('world')">Мир</button>
+  </nav>
+  <section id="discover">
+    <div class="tag">ОТКРЫТИЕ ДНЯ</div>
+    <div class="card">
+      <div class="big">🌌</div>
+      <h2>Сколько звёзд можно увидеть?</h2>
+      <p>В идеальных условиях тёмного неба невооружённым глазом можно увидеть несколько тысяч звёзд по всей небесной сфере.</p>
+      <button onclick="reveal(this)">Ещё один факт</button>
+      <p class="extra" hidden>Свет от некоторых видимых звёзд путешествовал до Земли сотни или тысячи лет.</p>
+    </div>
+  </section>
+  <section id="feed">
+    <h2>Лента открытий</h2>
+    <article class="card item" data-type="science">
+      <div class="tag">НАУКА</div>
+      <h2>Ты буквально состоишь из звёздной пыли</h2>
+      <p>Многие элементы в твоём теле были созданы внутри звёзд или при звёздных взрывах задолго до появления Земли.</p>
+      <button class="secondary" onclick="like(this)">♡ Нравится</button>
+      <button class="secondary" onclick="save(this)">☆ Сохранить</button>
+    </article>
+    <article class="card item" data-type="mind">
+      <div class="tag">ПСИХОЛОГИЯ</div>
+      <h2>Почему музыка вызывает воспоминания?</h2>
+      <p>Музыка тесно связана с эмоциями и памятью. Поэтому знакомая мелодия иногда мгновенно возвращает нас к определённому моменту жизни.</p>
+      <button class="secondary" onclick="like(this)">♡ Нравится</button>
+      <button class="secondary" onclick="save(this)">☆ Сохранить</button>
+    </article>
+    <article class="card item" data-type="world">
+      <div class="tag">МИР</div>
+      <h2>На Земле есть места без постоянного солнечного света</h2>
+      <p>В полярных регионах зимой солнце может не подниматься над горизонтом неделями или даже месяцами.</p>
+      <button class="secondary" onclick="like(this)">♡ Нравится</button>
+      <button class="secondary" onclick="save(this)">☆ Сохранить</button>
+    </article>
+  </section>
+  <section class="card">
+    <div class="tag">ТВОЙ ВОПРОС</div>
+    <h2>Что ты хочешь узнать?</h2>
+    <p>Напиши вопрос — пока это демонстрация интерфейса, без подключённого ИИ.</p>
+    <input id="question" placeholder="Почему…? Что если…?">
+    <button onclick="ask()">Исследовать вопрос</button>
+    <p id="answer"></p>
+  </section>
+  <section class="card">
+    <div class="tag">МИССИЯ ДНЯ</div>
+    <h2>Будь любопытнее</h2>
+    <p>Открой один новый факт и подумай, какой вопрос он у тебя вызывает.</p>
+    <button onclick="mission(this)">Выполнить миссию</button>
+  </section>
+</main>
+<footer>REALITY · Исследуй. Спрашивай. Открывай.</footer>
+<script>
+function reveal(b){const p=b.nextElementSibling;p.hidden=!p.hidden;b.textContent=p.hidden?'Ещё один факт':'Скрыть факт'}
+function like(b){b.textContent=b.textContent.startsWith('♡')?'♥ Понравилось':'♡ Нравится'}
+function save(b){b.textContent=b.textContent.startsWith('☆')?'★ Сохранено':'☆ Сохранить'}
+function show(type){document.querySelectorAll('.item').forEach(x=>x.hidden=type!=='all'&&x.dataset.type!==type);document.getElementById('feed').scrollIntoView({behavior:'smooth'})}
+function ask(){let q=document.getElementById('question').value.trim();document.getElementById('answer').textContent=q?'Вопрос принят для демонстрации: «'+q+'». Подключение ИИ добавим следующим этапом.':'Сначала напиши свой вопрос.'}
+function mission(b){b.textContent='✓ Миссия выполнена!'}
+</script>
+</body>
+</html>
